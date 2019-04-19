@@ -180,6 +180,9 @@ Angreifer versucht das Ziel-System durch eine hohe Anzahl unsinniger Anfragen zu
 
 Um in der Realität eine DoS-Attacke durchzuführen, wird das Zielsystem meist von mehreren Systemen angegriffen. Man spricht hier von einer Distributed-Denial-of-Service (DDoS) -Attacken. Hierfür werden meist Botnetze eingesetzt.
 
+##### DoS-Angriffsarten:
+
+
 
 
 #### Phishing
