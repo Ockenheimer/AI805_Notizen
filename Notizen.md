@@ -181,7 +181,26 @@ Angreifer versucht das Ziel-System durch eine hohe Anzahl unsinniger Anfragen zu
 Um in der Realität eine DoS-Attacke durchzuführen, wird das Zielsystem meist von mehreren Systemen angegriffen. Man spricht hier von einer Distributed-Denial-of-Service (DDoS) -Attacken. Hierfür werden meist Botnetze eingesetzt.
 
 ##### DoS-Angriffsarten:
+> Ich weiß nicht, ob er so genau sein will, aber jetzt steht es mal da
 
+**ARP-Spoofing**
+Angreifer ändertden ARP-Cache des Opfers bzw. durch ARP-Reply Pakete mit nicht existierenden MAC-Adressen
+vgl. <a href="https://de.wikipedia.org/wiki/Address_Resolution_Protocol">wiki</a>
+
+**MAC Flooding**
+Angreifer überflutet einen Switch-Port mit sehr vielen MAC-Frames unbekannter Quelladdressen
+vgl. <a href="http://einstein.informatik.uni-oldenburg.de/rechnernetze/mac_frames.htm">MAC-Frames</a> 
+
+Der Switch bekommt vom Angreifer einen MAC-Frame mit unbekannter Quelladresse. Diesen speichert er soweit Speicherplatz vorhanden ist. Ist der Speicher voll, leitet der Switch die Pakete an alle aktiven Ports weiter. Damit werden auch andere Switche im Netzwerk überladen. Schlussendlihc sind alle Speicher in allen Netzwerkgeräten mit sinnlosen MAC-Adressen überlaufen und reguläre Clients können sich nicht per MAC-Frame im Netzwerk anmelden.
+
+**DHCP Starvations**
+Angreifer fordert sämtliche verfügbaren IP-Adressen beim DHCP-Server an. Ein regulärer Client kann sich dann nicht mehr mit dem Netzwerk verbinden.
+vgl. <a href="https://de.wikipedia.org/wiki/DHCP">wiki</a>
+
+**ICMP Redirects**
+Angreifer sendet *ICMP Redirect* Paket über Default Gateway zum Opfer-Host mit nicht existierender Server-IP-Adresse
+Opfer übernimmt falsche Adresse und sendet an nicht existenten Server. Da kein Server da ist, bekommt sie auch keine Rückmeldung "falscher Server".
+vgl. <a href="https://de.wikipedia.org/wiki/Internet_Control_Message_Protocol">ICMP</a>
 
 
 
