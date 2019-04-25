@@ -171,6 +171,14 @@ IT-Sicherheit bezeichnet den SChutz vor Menschen, die Unberechtigt Informationen
 
 #### Spoofing
 
+Ein Angreifer verwendet die IP-Adresse seines Opfers um in dessen Namen eigene IP-Pakete zu versenden. Hierdurch übernimmt er im Netzwerk die Identität des Opfers.
+
+Warum funktioniert das?
+- Die IP-Protokolle vertrauen den eingetragenen (und bekannten) Quelladressen in den Paketen und führen keine erneute Authentifizierung durch.
+- Einträge im ARP-Cache sind leicht zu manipulieren, in dem die Verknüpfung von MAC-Adresse und IP-Adresse des Kommunikationspartners zu MAC des Angreifers und IP des Opfers ersetzt wird.
+
+
+> Der ARP-Cache ist sowas wie ein selbsterstelltes Telefonbuch für das  Netzwerk. Ein neu ins Netz kommender Rechner schickt einen ARP-Request mit seiner MAC- und IP-Adresse. Andere Rechner antworten ihm dann mit Ihrer eigenen Kombination. 
 
 #### DoS
 
@@ -206,15 +214,60 @@ vgl. <a href="https://de.wikipedia.org/wiki/Internet_Control_Message_Protocol">I
 
 #### Phishing
 
+(kurz für Password-Fishing)
+Ziel ist das Ausspionierne von Passwörtern und Zugangsdaten zu speziellen Internetplattformen (z.B. Onlinebanking) um sich oder Dritte zu Lasten des opfers zu bereichern.
+
+##### Vorgehensweise
+1. Angreifer wählt einen verbreiteten Online-Dienst aus (bekanntes Internetportal z.B. Paypal) und baut die Webseite auf seinem eigenen Webserver täuschend echt nach.
+2. Angreifer versendet Mail mit gefälschetem Absender an Opfer (möglichst noch mit persönlichen Informationen des Opfers) und fordert zur Kontaktaufnahme über Link zur eigenen Websiete auf.
+3. Auf gefälschter Webseite muss Anwender (echte) Zugangsdaten des Dienstes eingeben.
+4. Durch Anzeige einer Fehlermeldung wird ein Problem mit der Webseite angedeutet, der Angreifer unterbricht die Kommunikation mit dem Opfer.
+5. Angreifer loggt sich mit den Zugangsdaten des Opfers beim Original-Dienst ein und führt dort weitere Aktionen aus (Überweisungen tätigen, usw.)
+
+##### Arten von Phishing
+- Spear-Phishing:
+gezielte Mails an Personengruppen oder Einzelpersonen, wobei vorher eingeholte persönliche Informationen über das Opfer in die ail eingebaut werden.
+- Trojaner-Phishing
+Angreifer ändert durch unbemerkten Zugriff auf des Opfer-System den DNS-Eintrag in den Netzwerkeinstellungen. Hierdurch wird durch Eingabe der korrekten URL der gefälschte Server aufgerufen.
+- Man-in-the-Middle-Angriff
+mit sog. SSL-Trojaner. Daten werden vor der Verschlüsselung kompromitiert.
+
 
 #### Man-in-the-Middle
+
+Ein Angreifer schaltet sich in die Kommunikation zwischen A und B und täuscht unbemerkt die Identität des jeweils anderen vor. Er unterhält sich mit B als sei er A und umgekehrt.
+
+Hierdurch bemerken weder A noch B, dass sie eigentlich mit C sprechen. C kann die Schlüsselaushandlung zwischen A und B beobachten und so auch in verschlüsselte Kommunikation eingreifen.
+
+##### ARP-Spoofing
+1. Angreifer trennt Verbindung zwischen A und B
+2. ARP-Reply Paket mit MAC des Angreifers und IP des Opfers A an B und umgekehrt
+3. Nach Erhalt der Antwort speichern Opfer die falsche Zuordnung von MAC und IP (ARP-Poisoning)
 
 
 #### APT
 
 Advanced-Persistent-Threat
+Hochprofessionalisierter Angriff zur Erlangung von bestimmten Informationen oder Zielen.
+Angriff ist stets auf das Opfer maßgeschneidert.
 
+Angriff läuft in mehreren Phasen ab, um
+1. in das Opfersystem einzudringen
+2. Kommunktationskanäle mit dem Angreifer zu installieren 
+3. beabsichtigte Tätigkeiten über einen längeren Zeitraum unbemerkt auszuüben
 
+Angriffe sind kaum abzuwehren, da ein sehr detailliertes Fachwissen über die einzelnen Phasen und Arbeitsschritte benötigt wird.
+
+##### Phasen eines APT
+1. Preparation (Auskundschaften)
+2. Intrusion (Eindringen)
+3. Conquering victim network (Kompromittieren, Ausbreitung, Durchdringung, Übernahme des Netzwerks)
+4. Hiding presence / Camouflage (Verstecken)
+5. Gathering Information / Data Exfiltration (Abgreifen und Ausschleusen von Daten)
+6. Maintaining Access (Hintertüt einbauen)
+7. Clearing (Spurenbeseitigung)
+
+Phasen werden dynamisch und ggf. mehrfach durchlaufen.
 
 ### Kryptographische Verfahren und Methoden (RSA,AES, Modi, DH, Hashfunktionen, Signatur)
 

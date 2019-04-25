@@ -1239,6 +1239,13 @@ body .markdown-body
 <li>Angreifer kann Tastatureingaben mitlesen (<em>Keylogger</em>) oder Dateien des Rechners auslesen, verändern oder löschen.</li>
 </ul>
 <h4 id="spoofing">Spoofing<a class="headerlink" href="#spoofing" title="Permanent link"></a></h4>
+<p>Ein Angreifer verwendet die IP-Adresse seines Opfers um in dessen Namen eigene IP-Pakete zu versenden. Hierdurch übernimmt er im Netzwerk die Identität des Opfers.</p>
+<p>Warum funktioniert das?
+- Die IP-Protokolle vertrauen den eingetragenen (und bekannten) Quelladressen in den Paketen und führen keine erneute Authentifizierung durch.
+- Einträge im ARP-Cache sind leicht zu manipulieren, in dem die Verknüpfung von MAC-Adresse und IP-Adresse des Kommunikationspartners zu MAC des Angreifers und IP des Opfers ersetzt wird.</p>
+<blockquote>
+<p>Der ARP-Cache ist sowas wie ein selbsterstelltes Telefonbuch für das  Netzwerk. Ein neu ins Netz kommender Rechner schickt einen ARP-Request mit seiner MAC- und IP-Adresse. Andere Rechner antworten ihm dann mit Ihrer eigenen Kombination. </p>
+</blockquote>
 <h4 id="dos">DoS<a class="headerlink" href="#dos" title="Permanent link"></a></h4>
 <p>Denial-of-Service-Attacke</p>
 <p>Angreifer versucht das Ziel-System durch eine hohe Anzahl unsinniger Anfragen zu überlasten. Das angegeriffene System kann in Folge dieser Attacek nicht Ihrer normalen Tätigkeit nachgehen.</p>
@@ -1262,9 +1269,54 @@ Angreifer sendet <em>ICMP Redirect</em> Paket über Default Gateway zum Opfer-Ho
 Opfer übernimmt falsche Adresse und sendet an nicht existenten Server. Da kein Server da ist, bekommt sie auch keine Rückmeldung &ldquo;falscher Server&rdquo;.
 vgl. <a href="https://de.wikipedia.org/wiki/Internet_Control_Message_Protocol">ICMP</a></p>
 <h4 id="phishing">Phishing<a class="headerlink" href="#phishing" title="Permanent link"></a></h4>
+<p>(kurz für Password-Fishing)
+Ziel ist das Ausspionierne von Passwörtern und Zugangsdaten zu speziellen Internetplattformen (z.B. Onlinebanking) um sich oder Dritte zu Lasten des opfers zu bereichern.</p>
+<h5 id="vorgehensweise">Vorgehensweise<a class="headerlink" href="#vorgehensweise" title="Permanent link"></a></h5>
+<ol>
+<li>Angreifer wählt einen verbreiteten Online-Dienst aus (bekanntes Internetportal z.B. Paypal) und baut die Webseite auf seinem eigenen Webserver täuschend echt nach.</li>
+<li>Angreifer versendet Mail mit gefälschetem Absender an Opfer (möglichst noch mit persönlichen Informationen des Opfers) und fordert zur Kontaktaufnahme über Link zur eigenen Websiete auf.</li>
+<li>Auf gefälschter Webseite muss Anwender (echte) Zugangsdaten des Dienstes eingeben.</li>
+<li>Durch Anzeige einer Fehlermeldung wird ein Problem mit der Webseite angedeutet, der Angreifer unterbricht die Kommunikation mit dem Opfer.</li>
+<li>Angreifer loggt sich mit den Zugangsdaten des Opfers beim Original-Dienst ein und führt dort weitere Aktionen aus (Überweisungen tätigen, usw.)</li>
+</ol>
+<h5 id="arten-von-phishing">Arten von Phishing<a class="headerlink" href="#arten-von-phishing" title="Permanent link"></a></h5>
+<ul>
+<li>Spear-Phishing:
+gezielte Mails an Personengruppen oder Einzelpersonen, wobei vorher eingeholte persönliche Informationen über das Opfer in die ail eingebaut werden.</li>
+<li>Trojaner-Phishing
+Angreifer ändert durch unbemerkten Zugriff auf des Opfer-System den DNS-Eintrag in den Netzwerkeinstellungen. Hierdurch wird durch Eingabe der korrekten URL der gefälschte Server aufgerufen.</li>
+<li>Man-in-the-Middle-Angriff
+mit sog. SSL-Trojaner. Daten werden vor der Verschlüsselung kompromitiert.</li>
+</ul>
 <h4 id="man-in-the-middle">Man-in-the-Middle<a class="headerlink" href="#man-in-the-middle" title="Permanent link"></a></h4>
+<p>Ein Angreifer schaltet sich in die Kommunikation zwischen A und B und täuscht unbemerkt die Identität des jeweils anderen vor. Er unterhält sich mit B als sei er A und umgekehrt.</p>
+<p>Hierdurch bemerken weder A noch B, dass sie eigentlich mit C sprechen. C kann die Schlüsselaushandlung zwischen A und B beobachten und so auch in verschlüsselte Kommunikation eingreifen.</p>
+<h5 id="arp-spoofing">ARP-Spoofing<a class="headerlink" href="#arp-spoofing" title="Permanent link"></a></h5>
+<ol>
+<li>Angreifer trennt Verbindung zwischen A und B</li>
+<li>ARP-Reply Paket mit MAC des Angreifers und IP des Opfers A an B und umgekehrt</li>
+<li>Nach Erhalt der Antwort speichern Opfer die falsche Zuordnung von MAC und IP (ARP-Poisoning)</li>
+</ol>
 <h4 id="apt">APT<a class="headerlink" href="#apt" title="Permanent link"></a></h4>
-<p>Advanced-Persistent-Threat</p>
+<p>Advanced-Persistent-Threat
+Hochprofessionalisierter Angriff zur Erlangung von bestimmten Informationen oder Zielen.
+Angriff ist stets auf das Opfer maßgeschneidert.</p>
+<p>Angriff läuft in mehreren Phasen ab, um
+1. in das Opfersystem einzudringen
+2. Kommunktationskanäle mit dem Angreifer zu installieren 
+3. beabsichtigte Tätigkeiten über einen längeren Zeitraum unbemerkt auszuüben</p>
+<p>Angriffe sind kaum abzuwehren, da ein sehr detailliertes Fachwissen über die einzelnen Phasen und Arbeitsschritte benötigt wird.</p>
+<h5 id="phasen-eines-apt">Phasen eines APT<a class="headerlink" href="#phasen-eines-apt" title="Permanent link"></a></h5>
+<ol>
+<li>Preparation (Auskundschaften)</li>
+<li>Intrusion (Eindringen)</li>
+<li>Conquering victim network (Kompromittieren, Ausbreitung, Durchdringung, Übernahme des Netzwerks)</li>
+<li>Hiding presence / Camouflage (Verstecken)</li>
+<li>Gathering Information / Data Exfiltration (Abgreifen und Ausschleusen von Daten)</li>
+<li>Maintaining Access (Hintertüt einbauen)</li>
+<li>Clearing (Spurenbeseitigung)</li>
+</ol>
+<p>Phasen werden dynamisch und ggf. mehrfach durchlaufen.</p>
 <h3 id="kryptographische-verfahren-und-methoden-rsaaes-modi-dh-hashfunktionen-signatur">Kryptographische Verfahren und Methoden (RSA,AES, Modi, DH, Hashfunktionen, Signatur)<a class="headerlink" href="#kryptographische-verfahren-und-methoden-rsaaes-modi-dh-hashfunktionen-signatur" title="Permanent link"></a></h3>
 <h3 id="netzwerksicherheit-firewall-systeme-vpn-funktionsweise">Netzwerksicherheit: Firewall-Systeme, VPN (Funktionsweise)<a class="headerlink" href="#netzwerksicherheit-firewall-systeme-vpn-funktionsweise" title="Permanent link"></a></h3>
 <h3 id="authentifizierungsprotokolle-passwort-challenge-response-kerberos">Authentifizierungsprotokolle (Passwort, Challenge Response, Kerberos)<a class="headerlink" href="#authentifizierungsprotokolle-passwort-challenge-response-kerberos" title="Permanent link"></a></h3>
