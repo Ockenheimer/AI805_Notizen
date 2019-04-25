@@ -271,6 +271,107 @@ Phasen werden dynamisch und ggf. mehrfach durchlaufen.
 
 ### Kryptographische Verfahren und Methoden (RSA,AES, Modi, DH, Hashfunktionen, Signatur)
 
+krypthologische Verfahren bilden die Grundlage für Sicherheit im Netz
+Die Methoden sind zu unterteilen in 
+
+1. Verschlüsselung
+2. Integrität
+3. Authentizität
+
+Prinzip der Verschlüsselung:
+**Vertraulichkeit liefert nicht das Verfahren, dondern der geheime Schlüssel**
+
+
+#### RSA
+
+
+
+#### AES
+
+Blockchiffrenverfahren
+
+##### Typ
+symetrische Verschlüsselung mit verschiedenen Blocklängen (16 B, 24 B, 32 B) und Schlüssellänge
+
+##### interne Darstellung
+Matrixblock mit 4 Zeilen und Spalten (Abhängig von Blockgröße. grds. 4 Byte pro Spalte)
+
+##### Schlüssellänge
+variable Schlüssellänge (128, 192, 256 Bit) geheimer Schlüssel wird rundenweiße Sukzessive Verlängert
+
+> Schlüssel wird über KeyExpansion() auf (Runden+1) * Blockgröße viele Bytes vergrößert. 
+> Bsp.: Schlüssel ist "teste" 
+> 4 Runden
+> Blockgröße sind 6 Zeichen
+> Keyexpansion(test) = testet estete stetes tetest eteste 
+>
+>Beispiel von mir ohne Gewähr
+
+
+
+##### Verschlüsselung
+Datenamtrix mit Klartextblock als Ausgangswert wird in mehreren Runden durch Substitution und Permutation unter Verknüpfung mit Teilschlüsseln verschlüsselt
+
+##### Rundenanzahl
+in Abhängigkeit von Blockgröße und Schlüssellänge 10, 12 oder 14 Runden
+
+##### Operationen je Runde
+- SubByte: Substitution jede Byte im Block durch eine Transformation (S-Box)
+
+> Durch nachschauen in der S-Box wird das Byte durch ein anderes Byte ausgetauscht 
+
+- Shift Row: Permutation der Zeilen der Datenmatrix
+
+> Die Blöcke werden zeilenweise (ausgenommen Zeile 1) nach links verschoben. Bei einem 128bit Block wird die Zeile 2 einen Block nach links verschoben, Zeile 3 zwei Blöcke und Zeile 4 drei Blöcke. Diese Art der Permutation geschieht auch bei 160bit und 192bit. Bei 256bit z.B. ist die Permutation Z1 = 0, Z2 = 1, Z3  =3, Z4 = 4.
+
+- MixColumn: Mischen der Bytes in den Spalten der Datenmatrix (Polynom-Multiplikation)
+
+> Matrix-Vektor-Multiplikation mit vorgegebener Matrix (vorgegeben hab ich jett geraten....)
+
+- RoundKey: Bitweise XOR-Verknüpfung mit Rundenschlüssel (als Teil des erweiterten Schlüssels)
+
+
+vgl. zu AES komplett <a href="http://www.weblearn.hs-bremen.de/risse/RST/WS05/AES_CryptoLoop.pdf"> HS-Bremen</a>
+
+#### Modi
+
+##### ECB
+Electronic Code Book
+
+jeder Block wird für sich verschlüsselt. Es besteht keine Abhängigkeit zu den anderen Blöcken.
+
+Bedeutet aber auch, dass zwei gleiche Blöcke gleich verchlüsselt werden.
+
+Die Nachricht kann jedoch auch dann noch entschlüsselt werden, wenn einzelne Teile fehlen.
+
+
+##### CBC
+Cipher Block Chaining
+
+jeder Klartextblock wird mit dem vorhergehenden chifrierten Block XOR-verknüpft
+
+Somit ergibt sich eine Abhängigkeit zwischen den Blöcken.
+Der letzte lock ist gleichsam die Prüfsumme für die gesamte Datei. (ist vorher ein Block verändert worden, stimmt die Prüfsumme nicht mehr)
+
+Dies bedeutet, dass ist ein Block beschädigt oder verloren gegangen, können die nachfolgendenen Blöcke nicht mehr entschlüsselt werden.
+
+
+#### DH
+Diffie-Hellmann-Verfahren
+
+##### Typ
+Sitzungsschlüssel-Vereinbarungsdienst
+
+##### Initialisierung 
+
+
+
+#### Hashfunktion
+
+
+
+#### Signatur
+
 
 
 
