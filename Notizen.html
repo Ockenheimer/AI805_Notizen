@@ -1328,6 +1328,34 @@ Die Methoden sind zu unterteilen in </p>
 <p>Prinzip der Verschlüsselung:
 <strong>Vertraulichkeit liefert nicht das Verfahren, dondern der geheime Schlüssel</strong></p>
 <h4 id="rsa">RSA<a class="headerlink" href="#rsa" title="Permanent link"></a></h4>
+<p>ist ein asymetrisches Schlüsselverfahren, welches mit Public und Privat-Key arbeitet</p>
+<h5 id="schlusselbeschaffung">Schlüsselbeschaffung<a class="headerlink" href="#schlusselbeschaffung" title="Permanent link"></a></h5>
+<ol>
+<li>es werden zwei große Primzahlen gebildet (z.B. p=11 und q=19) und deren Produkt n gebildet ( n = p * q). Daraus ermittelt man phi(n) = p-1 * q-1 also in diesem Beispiel 180</li>
+<li>es wird ein Verschlüsselungswert e gewählt welcher die Voraussetzung hat ggt(e,180)=1</li>
+<li>es wird ein Entschlüsselungswert d gesucht welcher die Eigenschaft hat (d * e) mod(phi(n))=1</li>
+<li>Öffentlich bekannt sind e und n</li>
+</ol>
+<h5 id="verschlusseln">Verschlüsseln<a class="headerlink" href="#verschlusseln" title="Permanent link"></a></h5>
+<p>Eine Nachricht m wird verschlüsselt mit der Formel m^e mod n</p>
+<h5 id="entschlusseln">Entschlüsseln<a class="headerlink" href="#entschlusseln" title="Permanent link"></a></h5>
+<p>Eine verschlüsselte Nachricht c wird entschlüsselt mittels c^d mod n</p>
+<h5 id="beispiel">Beispiel<a class="headerlink" href="#beispiel" title="Permanent link"></a></h5>
+<p>p=11
+q=19</p>
+<p>n= 11 * 19 = 209</p>
+<p>phi(n) = 10 * 18 = 180</p>
+<p>e = z.B. 511 (ggt(511,180)=1)</p>
+<p>d = 31 (WolframAlpha sei Dank)</p>
+<blockquote>
+<p>(31 * 511)mod180 = 1
+Eingabe (d * 511)mod180 wird von wolframAlpha nach d aufgelöst</p>
+</blockquote>
+<p>geheime Nachricht m = 200</p>
+<h6 id="verschlusseln_1">Verschlüsseln<a class="headerlink" href="#verschlusseln_1" title="Permanent link"></a></h6>
+<p>200^511mod209 ergibt 167</p>
+<h6 id="entschlusseln_1">Entschlüsseln<a class="headerlink" href="#entschlusseln_1" title="Permanent link"></a></h6>
+<p>167^31mod209 ergibt 200</p>
 <h4 id="aes">AES<a class="headerlink" href="#aes" title="Permanent link"></a></h4>
 <p>Blockchiffrenverfahren</p>
 <h5 id="typ">Typ<a class="headerlink" href="#typ" title="Permanent link"></a></h5>
@@ -1387,8 +1415,62 @@ Der letzte lock ist gleichsam die Prüfsumme für die gesamte Datei. (ist vorher
 <p>Diffie-Hellmann-Verfahren</p>
 <h5 id="typ_1">Typ<a class="headerlink" href="#typ_1" title="Permanent link"></a></h5>
 <p>Sitzungsschlüssel-Vereinbarungsdienst</p>
-<h5 id="initialisierung">Initialisierung<a class="headerlink" href="#initialisierung" title="Permanent link"></a></h5>
+<h5 id="vorgehen">Vorgehen<a class="headerlink" href="#vorgehen" title="Permanent link"></a></h5>
+<ol>
+<li>Es wird über einen öffentlichen Kanal eine hohe Primzahl p und eine gemeinsame Zahl g kleiner als p ausgehandelt.</li>
+<li>Jeder Teilnehmer wählt eine zufällige Zahl r</li>
+<li>Die Teilnehmer berechnen jeweils (g^r mod p) und tauschen Ihre Ergebnisse E aus</li>
+<li>mit dem Ergebnis des jeweils anderen rechnen Sie (E^r mod p) und bekommen einen gemeinsamen und gleichen Schlüssel k</li>
+</ol>
+<h5 id="rechenbeispiel">Rechenbeispiel<a class="headerlink" href="#rechenbeispiel" title="Permanent link"></a></h5>
+<p>Ausgehandelt werden p = 59 und g = 29</p>
+<p>A nimmt Zufallszahl r = 2<br>
+B nimmt Zufallszahl r = 3</p>
+<p>A rechnet 29^2 mod 59 und erhält <strong>15</strong> <br>
+B rechnet 29^3 mod 59 und erhält <strong>22</strong></p>
+<p>A rechnet dann 22^2 mod 59 und erhält <strong>12</strong><br>
+B rechnet dann 15^3 mod 59 und erhält <strong>12</strong></p>
+<p>der geheime Schlüssel ist <strong><em>12</em></strong></p>
 <h4 id="hashfunktion">Hashfunktion<a class="headerlink" href="#hashfunktion" title="Permanent link"></a></h4>
+<h5 id="prinzip">Prinzip<a class="headerlink" href="#prinzip" title="Permanent link"></a></h5>
+<p>Aus einer Nachricht von beliebiger Länge wird ein Hashwert mit fester Länge gebildet.</p>
+<ul>
+<li>
+<p>One-Way-Funktion:<br>
+Soll heißen der Rückschluß vom Hash auf die ursprüngliche Nachricht ist nahezu unmöglich.</p>
+</li>
+<li>
+<p>collision-resistant:<br>
+Es ist fast unmöglich, dass zwei Nachrichten den selben Hash-Wert ergeben.</p>
+</li>
+<li>
+<p>second Preimage-resistant:<br>
+Selbst wenn ein Angreifer eine Passwort-Hashkombination weiß, kann er hierdurch keine Kollisionenen bei anderen Hashes errechnen.</p>
+</li>
+</ul>
+<p>Der Nachrichtenaustausch wird üblicherweise durch eine Verschlüsselung der Nachricht unterstützt, sodass ein Angreifer nicht Nachricht und Hash zugleich austauschen kann. Durhc die zusätzliche Verschlüsselung der Nachricht erreicht man <b>Datenintegrität</b></p>
+<h5 id="klassifikation-von-hash-funktionen">Klassifikation von HAsh-Funktionen<a class="headerlink" href="#klassifikation-von-hash-funktionen" title="Permanent link"></a></h5>
+<ul>
+<li>Modification Detection Code<br>
+Nachricht belieber Länge wird durch spezielle Kompressionsverfahren auf wenige Bytes komprimiert.</li>
+</ul>
+<blockquote>
+<p>vgl. <strong>SHA-1</strong> (160 Bits) o. <strong>SHA-2</strong> (256 Bits)</p>
+</blockquote>
+<ul>
+<li>Message Authentication Code<br>
+Parametrisierung durch symmetrisches Verschlüsselungsverfahren mit geheimen Schlüssel (keyed Hashfunction)</li>
+</ul>
+<blockquote>
+<p>vgl. MAC-AES</p>
+</blockquote>
+<p><strong>Kombination der Verfahren</strong></p>
+<blockquote>
+<blockquote>
+<p>HMAC
+zweimalige Anwendung des Kompressionsverfahrens auf die mit einem geheimen Schlüssel verkettete Nachricht.</p>
+</blockquote>
+</blockquote>
 <h4 id="signatur">Signatur<a class="headerlink" href="#signatur" title="Permanent link"></a></h4>
 <h3 id="netzwerksicherheit-firewall-systeme-vpn-funktionsweise">Netzwerksicherheit: Firewall-Systeme, VPN (Funktionsweise)<a class="headerlink" href="#netzwerksicherheit-firewall-systeme-vpn-funktionsweise" title="Permanent link"></a></h3>
 <h3 id="authentifizierungsprotokolle-passwort-challenge-response-kerberos">Authentifizierungsprotokolle (Passwort, Challenge Response, Kerberos)<a class="headerlink" href="#authentifizierungsprotokolle-passwort-challenge-response-kerberos" title="Permanent link"></a></h3>

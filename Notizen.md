@@ -284,6 +284,46 @@ Prinzip der Verschlüsselung:
 
 #### RSA
 
+ist ein asymetrisches Schlüsselverfahren, welches mit Public und Privat-Key arbeitet
+
+##### Schlüsselbeschaffung
+1. es werden zwei große Primzahlen gebildet (z.B. p=11 und q=19) und deren Produkt n gebildet ( n = p * q). Daraus ermittelt man phi(n) = p-1 * q-1 also in diesem Beispiel 180
+2. es wird ein Verschlüsselungswert e gewählt welcher die Voraussetzung hat ggt(e,180)=1
+3. es wird ein Entschlüsselungswert d gesucht welcher die Eigenschaft hat (d * e) mod(phi(n))=1
+4. Öffentlich bekannt sind e und n
+
+##### Verschlüsseln
+Eine Nachricht m wird verschlüsselt mit der Formel m^e mod n
+
+##### Entschlüsseln
+Eine verschlüsselte Nachricht c wird entschlüsselt mittels c^d mod n
+
+
+##### Beispiel
+p=11
+q=19
+
+n= 11 * 19 = 209
+
+phi(n) = 10 * 18 = 180
+
+e = z.B. 511 (ggt(511,180)=1)
+
+d = 31 (WolframAlpha sei Dank)
+> (31 * 511)mod180 = 1
+> Eingabe (d * 511)mod180 wird von wolframAlpha nach d aufgelöst
+
+geheime Nachricht m = 200
+
+######Verschlüsseln
+
+200^511mod209 ergibt 167
+
+######Entschlüsseln
+
+167^31mod209 ergibt 200
+
+
 
 
 #### AES
@@ -362,11 +402,59 @@ Diffie-Hellmann-Verfahren
 ##### Typ
 Sitzungsschlüssel-Vereinbarungsdienst
 
-##### Initialisierung 
+##### Vorgehen 
+1. Es wird über einen öffentlichen Kanal eine hohe Primzahl p und eine gemeinsame Zahl g kleiner als p ausgehandelt.
+2. Jeder Teilnehmer wählt eine zufällige Zahl r
+3. Die Teilnehmer berechnen jeweils (g^r mod p) und tauschen Ihre Ergebnisse E aus
+4. mit dem Ergebnis des jeweils anderen rechnen Sie (E^r mod p) und bekommen einen gemeinsamen und gleichen Schlüssel k
 
+##### Rechenbeispiel
+Ausgehandelt werden p = 59 und g = 29
+
+A nimmt Zufallszahl r = 2<br>
+B nimmt Zufallszahl r = 3
+
+A rechnet 29^2 mod 59 und erhält **15** <br>
+B rechnet 29^3 mod 59 und erhält **22**
+
+A rechnet dann 22^2 mod 59 und erhält **12**<br>
+B rechnet dann 15^3 mod 59 und erhält **12**
+
+der geheime Schlüssel ist ***12***
 
 
 #### Hashfunktion
+
+##### Prinzip
+
+Aus einer Nachricht von beliebiger Länge wird ein Hashwert mit fester Länge gebildet.
+
+- One-Way-Funktion:<br>
+Soll heißen der Rückschluß vom Hash auf die ursprüngliche Nachricht ist nahezu unmöglich.
+
+- collision-resistant:<br>
+Es ist fast unmöglich, dass zwei Nachrichten den selben Hash-Wert ergeben.
+
+- second Preimage-resistant:<br>
+Selbst wenn ein Angreifer eine Passwort-Hashkombination weiß, kann er hierdurch keine Kollisionenen bei anderen Hashes errechnen.
+
+Der Nachrichtenaustausch wird üblicherweise durch eine Verschlüsselung der Nachricht unterstützt, sodass ein Angreifer nicht Nachricht und Hash zugleich austauschen kann. Durhc die zusätzliche Verschlüsselung der Nachricht erreicht man <b>Datenintegrität</b>
+
+##### Klassifikation von HAsh-Funktionen
+
+- Modification Detection Code<br>
+Nachricht belieber Länge wird durch spezielle Kompressionsverfahren auf wenige Bytes komprimiert.
+
+> vgl. **SHA-1** (160 Bits) o. **SHA-2** (256 Bits)
+
+- Message Authentication Code<br>
+Parametrisierung durch symmetrisches Verschlüsselungsverfahren mit geheimen Schlüssel (keyed Hashfunction)
+
+> vgl. MAC-AES
+
+**Kombination der Verfahren**
+>> HMAC
+>> zweimalige Anwendung des Kompressionsverfahrens auf die mit einem geheimen Schlüssel verkettete Nachricht.
 
 
 
