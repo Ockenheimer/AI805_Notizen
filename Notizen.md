@@ -531,6 +531,39 @@ Der letztendliche Hash des gesamten Dokumentes m ergibt sich dann aus der mod(2)
 
 #### Signatur
 
+##### Anforderung an Unterschriften
+Prinzipiell soll eine Unterschrift folgende Eigenschaften haben
+- Authentizität
+- Integrität
+- Verbindlichkeit
+
+###### Authentizität
+Empfänger B soll sich sicher sein, dass Absender A diese Nachricht "unterschrieben" also verifiziert haben.
+
+###### Integrität
+Die Signatur soll mit dem unterschriebenen Dokument untrennbar verbunden sein.
+
+###### Verbindlichkeit
+Es soll jederzeit nachprüfbar sein, dass A die Unterschrift geleistet hat. A selber soll nicht bestreiten können, diese Unterschrift geleistet zu haben.
+
+##### technische Lösung
+
+Wie setzt man diese Anforderungen in der Realität um?
+
+Denkbar wäre, die gesamte Nachricht m durch A's geheimen Schlüssel verschlüsseln zu lassen. B könnte dann die versclüsselte Nachricht c mit A's öffentlichem Schlüssel entschlüsseln und wäre sicher, dass A diese verifiziert hat.
+
+Da m aber auch einige MB groß sein kann und c dadurch unnötig groß werden würde, wird stattdessen wie folgt vorgegangen.
+
+1. Nachricht m wird gehasht
+
+2. Der Hash wird mit A's geheimen Schlüssel verschlüsselt und an den unverschlüsselten Text m als Signatur s angehangen
+
+3. Der so "signierte" Text wird versendet
+
+4. B wiederrum hasht die bei ihm eingegangene Nachricht m und entschlüsselt s zurück zum Hash vom ursprünglichen m
+
+5. Stimmen der von B erstellte Hash mit dem aus s entschlüsselten überein, wurde m auf dem Weg von A nach B nicht verändert.
+
 
 
 
