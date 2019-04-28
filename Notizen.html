@@ -1447,6 +1447,16 @@ B rechnet 29^3 mod 59 und erhält <strong>22</strong></p>
 B rechnet dann 15^3 mod 59 und erhält <strong>12</strong></p>
 <p>der geheime Schlüssel ist <strong><em>12</em></strong></p>
 <h4 id="hashfunktion">Hashfunktion<a class="headerlink" href="#hashfunktion" title="Permanent link"></a></h4>
+<blockquote>
+<p>Hash-Funktionen sind eine Art &ldquo;Fingerabdruck&rdquo; für große Dateien. Wird das Dokument verändert, passt es nicht mehr zum Fingerabdruck (vgl. Lang 2018, S. 191)</p>
+</blockquote>
+<p>Diese Art der Funktion wird zur Verifikation eines Dokumentes verwendent.</p>
+<p>Eine zweite Nutzung ist die Speicherung von Passwörtern. Wird eine gehashte Datenbank entwendet, lässt sich kein Rückschluss auf das Passwort ziehen. </p>
+<p>Zum Dritten nutzt man Hashes für den schnellen Zugriff auf große Datenpakete.</p>
+<h5 id="kollisionen">Kollisionen<a class="headerlink" href="#kollisionen" title="Permanent link"></a></h5>
+<p>In jedem Hash-Verfahren gibt es nur eine endliche Anzahl von Kombinationen für Daten. Dies bedeutet, dass es unendlich viele Daten gibt, die den gleichen Hash-Wert zurückgeben.</p>
+<p>Hieraus folgt, dass eine Hash-Funktion nicht injektiv ist. Von einem Hash kann in der Regel nicht auf einen bestimmten Ursprungswert zurück gerechnet werden.(Im Gegensatz zur Verschlüsselung)</p>
+<p>Ergeben zwei unterschiedliche Daten den gleichen Hash spricht man von Kollisionen. Ist es in endlicher Zeit möglich, Daten zu finden, die den selben Hash-Wert ergeben, kann das Hash-Verfahren als unsicher bezeichnet werden.</p>
 <h5 id="prinzip">Prinzip<a class="headerlink" href="#prinzip" title="Permanent link"></a></h5>
 <p>Aus einer Nachricht von beliebiger Länge wird ein Hashwert mit fester Länge gebildet.</p>
 <ul>
@@ -1464,7 +1474,7 @@ Selbst wenn ein Angreifer eine Passwort-Hashkombination weiß, kann er hierdurch
 </li>
 </ul>
 <p>Der Nachrichtenaustausch wird üblicherweise durch eine Verschlüsselung der Nachricht unterstützt, sodass ein Angreifer nicht Nachricht und Hash zugleich austauschen kann. Durhc die zusätzliche Verschlüsselung der Nachricht erreicht man <b>Datenintegrität</b></p>
-<h5 id="klassifikation-von-hash-funktionen">Klassifikation von HAsh-Funktionen<a class="headerlink" href="#klassifikation-von-hash-funktionen" title="Permanent link"></a></h5>
+<h5 id="klassifikation-von-hash-funktionen">Klassifikation von Hash-Funktionen<a class="headerlink" href="#klassifikation-von-hash-funktionen" title="Permanent link"></a></h5>
 <ul>
 <li>Modification Detection Code<br>
 Nachricht belieber Länge wird durch spezielle Kompressionsverfahren auf wenige Bytes komprimiert.</li>
@@ -1486,6 +1496,28 @@ Parametrisierung durch symmetrisches Verschlüsselungsverfahren mit geheimen Sch
 zweimalige Anwendung des Kompressionsverfahrens auf die mit einem geheimen Schlüssel verkettete Nachricht.</p>
 </blockquote>
 </blockquote>
+<h5 id="sha-1">SHA-1<a class="headerlink" href="#sha-1" title="Permanent link"></a></h5>
+<p>SHA-1 ist ein mittlerweile veraltetes Hash-Verfarhen, welches schlussendlich einen 160-bit langen Hash ausgibt.</p>
+<p>Im weiteren folgt der Ablauf des Verfahrens</p>
+<h6 id="vorbereitung-dokument-auffullen">Vorbereitung Dokument auffüllen.<a class="headerlink" href="#vorbereitung-dokument-auffullen" title="Permanent link"></a></h6>
+<p>Das Dokument m wird soweit aufgefüllt, dass die Länge des Dokumentes ein mehrfaches von 512 ergibt.
+Anschließend prüft der Algorithmus mittels mod(512) ob noch mindestens 64 bit in der Nachricht frei sind.
+Ist dies nicht der Fall, wird ein zusätzlicher 512 Bit-Block angehängt.</p>
+<p>In die letzten 64 bit von m wird die Länge des Dokumentes abgelegt. Der Zwischenraum von Nachricht bis Länge wird mit <em>100000&hellip;</em> aufgefüllt.</p>
+<h6 id="vorbereitung-dokument-expandieren">Vorbereitung Dokument expandieren<a class="headerlink" href="#vorbereitung-dokument-expandieren" title="Permanent link"></a></h6>
+<p>Das Dokument m wird nun in 512-Bit-Blöcke unterteilt. Jeder Block wird dann in 80 Wörter je 32 Bit expandiert.</p>
+<p>Hierzu werden zunächst 16 Wörter á 32 Bit aufgeteilt (W0, W1, W2, usw)
+Die fehlenden 64 Wörter W(j) werden dann wie folgt berechnet:<br></p>
+<blockquote>
+<p>W(j)=(W(j-3)+W(j-8)+W(j-14)+W(j-16))
+Die Addition wird mod2 durchgeführt</p>
+</blockquote>
+<h6 id="hashen">Hashen<a class="headerlink" href="#hashen" title="Permanent link"></a></h6>
+<p>Ich denk mal, es wird nicht erwartet, die Hash-Funktion von SHA-1 darzustellen. Wäre auch albern.
+Soviel sei nur gesagt:
+- Jeweils 20 Wörter werden über 20 Runden &ldquo;ge-XOR-ed&rdquo; und danach addiert</p>
+<p>Zum Schluss bleibt aus jedem 512-Bit-Block ein 160-Bit Hash über</p>
+<p>Der letztendliche Hash des gesamten Dokumentes m ergibt sich dann aus der mod(2)-Addition aller Hashes der einzelnen Blöcke.</p>
 <h4 id="signatur">Signatur<a class="headerlink" href="#signatur" title="Permanent link"></a></h4>
 <h3 id="netzwerksicherheit-firewall-systeme-vpn-funktionsweise">Netzwerksicherheit: Firewall-Systeme, VPN (Funktionsweise)<a class="headerlink" href="#netzwerksicherheit-firewall-systeme-vpn-funktionsweise" title="Permanent link"></a></h3>
 <h3 id="authentifizierungsprotokolle-passwort-challenge-response-kerberos">Authentifizierungsprotokolle (Passwort, Challenge Response, Kerberos)<a class="headerlink" href="#authentifizierungsprotokolle-passwort-challenge-response-kerberos" title="Permanent link"></a></h3>

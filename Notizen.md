@@ -497,6 +497,37 @@ Parametrisierung durch symmetrisches Verschlüsselungsverfahren mit geheimen Sch
 
 SHA-1 ist ein mittlerweile veraltetes Hash-Verfarhen, welches schlussendlich einen 160-bit langen Hash ausgibt.
 
+Im weiteren folgt der Ablauf des Verfahrens
+
+###### Vorbereitung Dokument auffüllen.
+
+Das Dokument m wird soweit aufgefüllt, dass die Länge des Dokumentes ein mehrfaches von 512 ergibt.
+Anschließend prüft der Algorithmus mittels mod(512) ob noch mindestens 64 bit in der Nachricht frei sind.
+Ist dies nicht der Fall, wird ein zusätzlicher 512 Bit-Block angehängt.
+
+In die letzten 64 bit von m wird die Länge des Dokumentes abgelegt. Der Zwischenraum von Nachricht bis Länge wird mit *100000...* aufgefüllt.
+
+###### Vorbereitung Dokument expandieren
+
+Das Dokument m wird nun in 512-Bit-Blöcke unterteilt. Jeder Block wird dann in 80 Wörter je 32 Bit expandiert.
+
+Hierzu werden zunächst 16 Wörter á 32 Bit aufgeteilt (W0, W1, W2, usw)
+Die fehlenden 64 Wörter W(j) werden dann wie folgt berechnet:<br>
+>W(j)=(W(j-3)+W(j-8)+W(j-14)+W(j-16))
+Die Addition wird mod2 durchgeführt
+
+###### Hashen
+
+Ich denk mal, es wird nicht erwartet, die Hash-Funktion von SHA-1 darzustellen. Wäre auch albern.
+Soviel sei nur gesagt:
+- Jeweils 20 Wörter werden über 20 Runden "ge-XOR-ed" und danach addiert
+
+Zum Schluss bleibt aus jedem 512-Bit-Block ein 160-Bit Hash über
+
+Der letztendliche Hash des gesamten Dokumentes m ergibt sich dann aus der mod(2)-Addition aller Hashes der einzelnen Blöcke.
+
+
+
 
 #### Signatur
 
