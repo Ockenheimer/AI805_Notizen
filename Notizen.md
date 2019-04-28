@@ -445,6 +445,22 @@ der geheime Schlüssel ist ***12***
 
 #### Hashfunktion
 
+> Hash-Funktionen sind eine Art "Fingerabdruck" für große Dateien. Wird das Dokument verändert, passt es nicht mehr zum Fingerabdruck (vgl. Lang 2018, S. 191)
+
+Diese Art der Funktion wird zur Verifikation eines Dokumentes verwendent.
+
+Eine zweite Nutzung ist die Speicherung von Passwörtern. Wird eine gehashte Datenbank entwendet, lässt sich kein Rückschluss auf das Passwort ziehen. 
+
+Zum Dritten nutzt man Hashes für den schnellen Zugriff auf große Datenpakete.
+
+##### Kollisionen
+
+In jedem Hash-Verfahren gibt es nur eine endliche Anzahl von Kombinationen für Daten. Dies bedeutet, dass es unendlich viele Daten gibt, die den gleichen Hash-Wert zurückgeben.
+
+Hieraus folgt, dass eine Hash-Funktion nicht injektiv ist. Von einem Hash kann in der Regel nicht auf einen bestimmten Ursprungswert zurück gerechnet werden.(Im Gegensatz zur Verschlüsselung)
+
+Ergeben zwei unterschiedliche Daten den gleichen Hash spricht man von Kollisionen. Ist es in endlicher Zeit möglich, Daten zu finden, die den selben Hash-Wert ergeben, kann das Hash-Verfahren als unsicher bezeichnet werden.
+
 ##### Prinzip
 
 Aus einer Nachricht von beliebiger Länge wird ein Hashwert mit fester Länge gebildet.
@@ -460,7 +476,7 @@ Selbst wenn ein Angreifer eine Passwort-Hashkombination weiß, kann er hierdurch
 
 Der Nachrichtenaustausch wird üblicherweise durch eine Verschlüsselung der Nachricht unterstützt, sodass ein Angreifer nicht Nachricht und Hash zugleich austauschen kann. Durhc die zusätzliche Verschlüsselung der Nachricht erreicht man <b>Datenintegrität</b>
 
-##### Klassifikation von HAsh-Funktionen
+##### Klassifikation von Hash-Funktionen
 
 - Modification Detection Code<br>
 Nachricht belieber Länge wird durch spezielle Kompressionsverfahren auf wenige Bytes komprimiert.
@@ -476,6 +492,10 @@ Parametrisierung durch symmetrisches Verschlüsselungsverfahren mit geheimen Sch
 >> HMAC
 >> zweimalige Anwendung des Kompressionsverfahrens auf die mit einem geheimen Schlüssel verkettete Nachricht.
 
+
+##### SHA-1
+
+SHA-1 ist ein mittlerweile veraltetes Hash-Verfarhen, welches schlussendlich einen 160-bit langen Hash ausgibt.
 
 
 #### Signatur
