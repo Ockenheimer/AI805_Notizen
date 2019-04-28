@@ -1411,6 +1411,21 @@ Keyexpansion(test) = testet estete stetes tetest eteste </p>
 <p>Somit ergibt sich eine Abhängigkeit zwischen den Blöcken.
 Der letzte lock ist gleichsam die Prüfsumme für die gesamte Datei. (ist vorher ein Block verändert worden, stimmt die Prüfsumme nicht mehr)</p>
 <p>Dies bedeutet, dass ist ein Block beschädigt oder verloren gegangen, können die nachfolgendenen Blöcke nicht mehr entschlüsselt werden.</p>
+<h5 id="ctr">CTR<a class="headerlink" href="#ctr" title="Permanent link"></a></h5>
+<p>Counter Mode</p>
+<p>Der Klartext wird nicht mit der Verschlüsselungsfunktion E verschlüsselt</p>
+<p>Stattdessen wird ein Zähler z verschlüsselt.</p>
+<h6 id="ablauf">Ablauf<a class="headerlink" href="#ablauf" title="Permanent link"></a></h6>
+<ol>
+<li>Initialisierung eines Zählers z z.B. mit 1 (üblicherweise eine große Zahl)</li>
+<li>E wird auf z angewendet</li>
+<li>mit E(z) wird der Klartext-Block m^1 mod(2) addiert (XOR)</li>
+<li>z++</li>
+<li>GOTO 2 </li>
+</ol>
+<h6 id="vorteil">Vorteil<a class="headerlink" href="#vorteil" title="Permanent link"></a></h6>
+<p>Eine Entschlüsselung ist als Funktion D nciht notwendig
+Der Empfänger kann den verschlüsselten Text c einfach Blockweise erneut &ldquo;verschlüsseln&rdquo; und erhält dadurch den Klartext m zurück. ER benötigt nur den Startwert z den man im Klartext übermittelt</p>
 <h4 id="dh">DH<a class="headerlink" href="#dh" title="Permanent link"></a></h4>
 <p>Diffie-Hellmann-Verfahren</p>
 <h5 id="typ_1">Typ<a class="headerlink" href="#typ_1" title="Permanent link"></a></h5>

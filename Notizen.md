@@ -395,6 +395,26 @@ Der letzte lock ist gleichsam die Prüfsumme für die gesamte Datei. (ist vorher
 
 Dies bedeutet, dass ist ein Block beschädigt oder verloren gegangen, können die nachfolgendenen Blöcke nicht mehr entschlüsselt werden.
 
+##### CTR
+Counter Mode
+
+Der Klartext wird nicht mit der Verschlüsselungsfunktion E verschlüsselt
+
+Stattdessen wird ein Zähler z verschlüsselt.
+
+###### Ablauf
+1. Initialisierung eines Zählers z z.B. mit 1 (üblicherweise eine große Zahl)
+2. E wird auf z angewendet
+3. mit E(z) wird der Klartext-Block m^1 mod(2) addiert (XOR)
+4. z++
+5. GOTO 2 
+
+###### Vorteil
+Eine Entschlüsselung ist als Funktion D nciht notwendig
+Der Empfänger kann den verschlüsselten Text c einfach Blockweise erneut "verschlüsseln" und erhält dadurch den Klartext m zurück. ER benötigt nur den Startwert z den man im Klartext übermittelt
+
+
+
 
 #### DH
 Diffie-Hellmann-Verfahren
