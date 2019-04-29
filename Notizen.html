@@ -1552,5 +1552,72 @@ Soviel sei nur gesagt:
 </li>
 </ol>
 <h3 id="netzwerksicherheit-firewall-systeme-vpn-funktionsweise">Netzwerksicherheit: Firewall-Systeme, VPN (Funktionsweise)<a class="headerlink" href="#netzwerksicherheit-firewall-systeme-vpn-funktionsweise" title="Permanent link"></a></h3>
+<h4 id="firewall-systeme">Firewall-Systeme<a class="headerlink" href="#firewall-systeme" title="Permanent link"></a></h4>
+<h5 id="bestandteile">Bestandteile<a class="headerlink" href="#bestandteile" title="Permanent link"></a></h5>
+<p><strong>Technik</strong>
+Anordnung zwischen zwei Netzen mit unterschiedlich hohem SChutzbedarf (auch innerhalb des Unternehmens)</p>
+<p><strong>Sicherheitspolitik</strong>
+Zugriff auf Komponenten und Ressourcen des zu schützenden Netzes und/oder Kommunikation zwischen den Netzen nur in Übereinstimmung mit Sicherheitskonzept (e.g. Zugangskontollen bereitstellen)</p>
+<p><strong>Grundsatz:</strong> Alles was nicht erlaubt ist, ist verboten!</p>
+<p>Es müssen Entscheidungen getroffen werden:
+- Welche Rechner dürfen mit welchen Diensten nach außen gehen/von außen erreichbar sein (HTTP, FTP, SMTP, usw.)?
+- Welche Benutzergruppen gibt es?
+- Wie wird auf erkannte Angriffe reagiert?</p>
+<p><strong>Sicherheitsmanagement</strong></p>
+<ul>
+<li>Protokollierung von Zugriffen</li>
+<li>Intrusion Detection Risikomanagement</li>
+<li>Notfallmanagemen</li>
+<li>Audits nach IT-Sicherheitspolitik</li>
+<li>Schulung von MA</li>
+<li>Schutz der Firewall-Komponenten</li>
+<li>etc.</li>
+</ul>
+<h5 id="firewallarten">Firewallarten<a class="headerlink" href="#firewallarten" title="Permanent link"></a></h5>
+<h6 id="paketfilter-screening-router">Paketfilter <em>Screening Router</em><a class="headerlink" href="#paketfilter-screening-router" title="Permanent link"></a></h6>
+<ul>
+<li>Router mit IP- und Portfilter auf Netzwerk- und Transportschicht</li>
+<li>Informationen für die Filter werden aus dem IP- bzw. TCP/UDP-Header ausgelesen und zur Filterung verwendet.</li>
+<li>für ein- und ausgehende Pakete können unterschiedliche Regeln eingerichtet werden.</li>
+<li>Regeln werden nacheinander abgearbeitet<ul>
+<li>greift eine der Regeln, wird das Paket verworfen. Eine weitergehende Prüfung findet nicht statt</li>
+</ul>
+</li>
+</ul>
+<p>mögliche Reaktionen:
+- Pakete werden geroutet
+- Pakete werden abgeblockt
+- Pakete werden verworfen</p>
+<p>Blockierte oder verworfene Pakete werden protokolliert.</p>
+<p><strong>Sonderfall: Dynamische Paketfilter</strong></p>
+<p>Funktioniert wie statischer Paketfilter, kann jedoch temporär dynamische Zugangsregeln einrichten.</p>
+<blockquote>
+<p>Bsp.:
+Von einem ausgehenden UDP-Paket werden sowohl Quell- als auch Zieladresse und -Port temporär gespeichert. Erfolgt in einer gewissen Zeitspanne eine entsprechende Antwort mit den gleichen Adressen, wird das Paket ins gesicherte Netz weitergelassen. Kommt das Paket ausserhalb der erwarteten Antwortzeit, wird dieses abgeblockt oder verworfen.</p>
+</blockquote>
+<p>Funktionsweise kann auch umgedreht werden. </p>
+<blockquote>
+<p>Zugriffe auf bestimmte Rechner mit mehr als n Zugriffen/Minute werden für m Minuten gesperrt.</p>
+</blockquote>
+<h6 id="verbindungs-gateway-circuit-level-gateway-bastion-router-proxy-server">Verbindungs-Gateway <em>Circuit-Level-Gateway, Bastion Router, Proxy-Server</em><a class="headerlink" href="#verbindungs-gateway-circuit-level-gateway-bastion-router-proxy-server" title="Permanent link"></a></h6>
+<p>Trennung zweier Netze durch einen Rechner mit je einem Anschluß für das lokale Netz sowie das externe Netz (<em>Dual Homed Gateway</em>)
+Filterfunktionalität auf der Transportschicht</p>
+<h6 id="application-gateway-application-level-gateway-kurz-proxy">Application-Gateway <em>Application-Level-Gateway, kurz Proxy</em><a class="headerlink" href="#application-gateway-application-level-gateway-kurz-proxy" title="Permanent link"></a></h6>
+<p>Stellt eine komplexe Filterfunktionalität auf der Anwendungsschicht bereit (z.B. Telnet, SSH, usw.)
+Dienstspezifische Kontrollen möglich </p>
+<p>Anwendungsprogramm welches sich dem Server gegenüber als Client ausgibt, dem Client gegenüber als Server.</p>
+<p>Filterung der Daten erfolgt auf der Anwendungsebene. Das heißt, der Proxy hat Kenntnis von der jeweiligen Anwendung und den Anforderungen dieser Anwendung.</p>
+<p>Durch einen differenzierten Austhentifikationsmechanismus können zu einzelnen Anwedngunen Zugangskontrollen dargestellt werden.</p>
+<h5 id="firewall-architekturen">Firewall-Architekturen<a class="headerlink" href="#firewall-architekturen" title="Permanent link"></a></h5>
+<p>Die Firewall-Arten werden zu Systemen zusammengeschlossen, um die unterschiedlichen Aufgaben bestmöglich zu erfüllen.</p>
+<p>Diese Systeme müssen aus Sicht des zu schützendenen Systems &ldquo;so weit außen wie möglich&rdquo; platziert werden.</p>
+<p>Zwischen dem internen und externen Netz wird ein zsätzliches Subnetz abgetrennt, welches von innen und außen nur durch Paketfilter erreicht werden kann. Es wird als screened subnet (oder auch DMZ) bezeichnet.</p>
+<h4 id="vpn-funktionsweise">VPN (Funktionsweise)<a class="headerlink" href="#vpn-funktionsweise" title="Permanent link"></a></h4>
 <h3 id="authentifizierungsprotokolle-passwort-challenge-response-kerberos">Authentifizierungsprotokolle (Passwort, Challenge Response, Kerberos)<a class="headerlink" href="#authentifizierungsprotokolle-passwort-challenge-response-kerberos" title="Permanent link"></a></h3>
-<h3 id="unternehmensweite-it-sicherheitspolitik-vorgehensweise-rechtliche-aspekte-penetration-testing">Unternehmensweite IT-Sicherheitspolitik (Vorgehensweise, rechtliche Aspekte, Penetration Testing)<a class="headerlink" href="#unternehmensweite-it-sicherheitspolitik-vorgehensweise-rechtliche-aspekte-penetration-testing" title="Permanent link"></a></h3></article></body></html>
+<h4 id="passwort">Passwort<a class="headerlink" href="#passwort" title="Permanent link"></a></h4>
+<h4 id="challenge-response">Challenge Response<a class="headerlink" href="#challenge-response" title="Permanent link"></a></h4>
+<h4 id="kerberos">Kerberos<a class="headerlink" href="#kerberos" title="Permanent link"></a></h4>
+<h3 id="unternehmensweite-it-sicherheitspolitik-vorgehensweise-rechtliche-aspekte-penetration-testing">Unternehmensweite IT-Sicherheitspolitik (Vorgehensweise, rechtliche Aspekte, Penetration Testing)<a class="headerlink" href="#unternehmensweite-it-sicherheitspolitik-vorgehensweise-rechtliche-aspekte-penetration-testing" title="Permanent link"></a></h3>
+<h4 id="vorgehensweise_1">Vorgehensweise<a class="headerlink" href="#vorgehensweise_1" title="Permanent link"></a></h4>
+<h4 id="rechtliche-aspekte">rechtliche Aspekte<a class="headerlink" href="#rechtliche-aspekte" title="Permanent link"></a></h4>
+<h4 id="penetration-testing">Penetration Testing<a class="headerlink" href="#penetration-testing" title="Permanent link"></a></h4></article></body></html>

@@ -569,12 +569,116 @@ Da m aber auch einige MB groß sein kann und c dadurch unnötig groß werden wü
 
 ### Netzwerksicherheit: Firewall-Systeme, VPN (Funktionsweise)
 
+#### Firewall-Systeme
+
+##### Bestandteile
+
+**Technik**
+Anordnung zwischen zwei Netzen mit unterschiedlich hohem SChutzbedarf (auch innerhalb des Unternehmens)
+
+**Sicherheitspolitik**
+Zugriff auf Komponenten und Ressourcen des zu schützenden Netzes und/oder Kommunikation zwischen den Netzen nur in Übereinstimmung mit Sicherheitskonzept (e.g. Zugangskontollen bereitstellen)
+
+**Grundsatz:** Alles was nicht erlaubt ist, ist verboten!
+
+Es müssen Entscheidungen getroffen werden:
+- Welche Rechner dürfen mit welchen Diensten nach außen gehen/von außen erreichbar sein (HTTP, FTP, SMTP, usw.)?
+- Welche Benutzergruppen gibt es?
+- Wie wird auf erkannte Angriffe reagiert?
+
+
+**Sicherheitsmanagement**
+
+- Protokollierung von Zugriffen
+- Intrusion Detection Risikomanagement
+- Notfallmanagemen
+- Audits nach IT-Sicherheitspolitik
+- Schulung von MA
+- Schutz der Firewall-Komponenten
+- etc.
+
+
+##### Firewallarten
+
+###### Paketfilter *Screening Router*
+
+- Router mit IP- und Portfilter auf Netzwerk- und Transportschicht
+- Informationen für die Filter werden aus dem IP- bzw. TCP/UDP-Header ausgelesen und zur Filterung verwendet.
+- für ein- und ausgehende Pakete können unterschiedliche Regeln eingerichtet werden.
+- Regeln werden nacheinander abgearbeitet
+	- greift eine der Regeln, wird das Paket verworfen. Eine weitergehende Prüfung findet nicht statt
+
+mögliche Reaktionen:
+- Pakete werden geroutet
+- Pakete werden abgeblockt
+- Pakete werden verworfen
+
+Blockierte oder verworfene Pakete werden protokolliert.
+
+**Sonderfall: Dynamische Paketfilter**
+
+Funktioniert wie statischer Paketfilter, kann jedoch temporär dynamische Zugangsregeln einrichten.
+
+>Bsp.:
+>Von einem ausgehenden UDP-Paket werden sowohl Quell- als auch Zieladresse und -Port temporär gespeichert. Erfolgt in einer gewissen Zeitspanne eine entsprechende Antwort mit den gleichen Adressen, wird das Paket ins gesicherte Netz weitergelassen. Kommt das Paket ausserhalb der erwarteten Antwortzeit, wird dieses abgeblockt oder verworfen.
+
+Funktionsweise kann auch umgedreht werden. 
+>Zugriffe auf bestimmte Rechner mit mehr als n Zugriffen/Minute werden für m Minuten gesperrt.
+
+
+###### Verbindungs-Gateway *Circuit-Level-Gateway, Bastion Router, Proxy-Server*
+Trennung zweier Netze durch einen Rechner mit je einem Anschluß für das lokale Netz sowie das externe Netz (*Dual Homed Gateway*)
+Filterfunktionalität auf der Transportschicht
+
+###### Application-Gateway *Application-Level-Gateway, kurz Proxy*
+Stellt eine komplexe Filterfunktionalität auf der Anwendungsschicht bereit (z.B. Telnet, SSH, usw.)
+Dienstspezifische Kontrollen möglich 
+
+Anwendungsprogramm welches sich dem Server gegenüber als Client ausgibt, dem Client gegenüber als Server.
+
+Filterung der Daten erfolgt auf der Anwendungsebene. Das heißt, der Proxy hat Kenntnis von der jeweiligen Anwendung und den Anforderungen dieser Anwendung.
+
+Durch einen differenzierten Austhentifikationsmechanismus können zu einzelnen Anwedngunen Zugangskontrollen dargestellt werden.
+
+
+##### Firewall-Architekturen
+Die Firewall-Arten werden zu Systemen zusammengeschlossen, um die unterschiedlichen Aufgaben bestmöglich zu erfüllen.
+
+Diese Systeme müssen aus Sicht des zu schützendenen Systems "so weit außen wie möglich" platziert werden.
+
+Zwischen dem internen und externen Netz wird ein zsätzliches Subnetz abgetrennt, welches von innen und außen nur durch Paketfilter erreicht werden kann. Es wird als screened subnet (oder auch DMZ) bezeichnet.
+
+
+#### VPN (Funktionsweise)
 
 
 ### Authentifizierungsprotokolle (Passwort, Challenge Response, Kerberos)
 
 
+#### Passwort
+
+
+
+#### Challenge Response
+
+
+
+#### Kerberos
+
+
 
 ### Unternehmensweite IT-Sicherheitspolitik (Vorgehensweise, rechtliche Aspekte, Penetration Testing)
 	
-	
+
+####Vorgehensweise
+
+
+
+
+#### rechtliche Aspekte
+
+
+
+#### Penetration Testing
+
+
