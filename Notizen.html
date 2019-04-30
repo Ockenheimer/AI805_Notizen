@@ -1612,7 +1612,32 @@ Dienstspezifische Kontrollen möglich </p>
 <p>Die Firewall-Arten werden zu Systemen zusammengeschlossen, um die unterschiedlichen Aufgaben bestmöglich zu erfüllen.</p>
 <p>Diese Systeme müssen aus Sicht des zu schützendenen Systems &ldquo;so weit außen wie möglich&rdquo; platziert werden.</p>
 <p>Zwischen dem internen und externen Netz wird ein zsätzliches Subnetz abgetrennt, welches von innen und außen nur durch Paketfilter erreicht werden kann. Es wird als screened subnet (oder auch DMZ) bezeichnet.</p>
+<h5 id="fazit-zentrale-firewall">Fazit zentrale Firewall<a class="headerlink" href="#fazit-zentrale-firewall" title="Permanent link"></a></h5>
+<ul>
+<li>kontrollieren und analysieren die Kommunikation auf Netzwerk-, Transport- und Anwendungsebene (ein- wie ausgehend)</li>
+<li>prüfen, welche Rechnersysteme miteinander kommunizieren dürfen</li>
+<li>prüfen, welche Benutzer eine Kommunikation aufbauen dürfen</li>
+<li>überprüfen die Echtheit der Benutzer (Authentifikation)</li>
+<li>protokollieren Aktivitäten und Ereignisse</li>
+<li>reagieren auf vordefinierte Ereignisse</li>
+<li>schützen nicht vor internen Angriffen</li>
+<li>schützen nicht vor Angriffen, die über andere Netzzugänge laufen</li>
+</ul>
 <h4 id="vpn-funktionsweise">VPN (Funktionsweise)<a class="headerlink" href="#vpn-funktionsweise" title="Permanent link"></a></h4>
+<ul>
+<li>Sicherer Datentransfer zwischen zwei oder mehr lokalen Netzen über offene unsichere Netze durch Emulation eines homogenen virtuellen Netzes</li>
+<li>Gewährleistung von Vertraulichkeit der Information, Integrität der Daten und / oder Authentifikation der Kommunikationspartner durch Tunneling</li>
+<li>Ggf. Bereitstellung von Audit- und Accounting-Informationen</li>
+</ul>
+<h5 id="funktionsweise">Funktionsweise<a class="headerlink" href="#funktionsweise" title="Permanent link"></a></h5>
+<p>Ein VPN kann auf verschiedenen OSI-Ebenen eingerichtet werden, Daher ist die Funktionsweise sehr allgemein erklärt</p>
+<p><strong>Encapsulatinion</strong>
+Die Pakete des zu tunnelnden Protokolls (z.B. IP-Pakete) bekommt einen zusätzlichen Header (den sog. Tunnel-Header) am Startpunkt des Tunnels (VPN-Gateway, bzw. VPN-Client)</p>
+<p><strong>Routing</strong>
+Im Tunnelheader befinden sich die Informationen zum Routing, der Verschlüsselung, usw. 
+Aufgrund dieser Informationen wird das Paket über das WAN bis zum Tunnelendpunkt geroutet.</p>
+<p><strong>Decapsulation</strong>
+Am Tunnelendpunkt (VPN-Server, bzw. weiteres VPN-Gateway) wird der zusätzliche Tunnelheader entfernt. Ggf. wird eine Entschlüsselung des hinterlegten Pakets durchgeführt.</p>
 <h3 id="authentifizierungsprotokolle-passwort-challenge-response-kerberos">Authentifizierungsprotokolle (Passwort, Challenge Response, Kerberos)<a class="headerlink" href="#authentifizierungsprotokolle-passwort-challenge-response-kerberos" title="Permanent link"></a></h3>
 <h4 id="passwort">Passwort<a class="headerlink" href="#passwort" title="Permanent link"></a></h4>
 <h4 id="challenge-response">Challenge Response<a class="headerlink" href="#challenge-response" title="Permanent link"></a></h4>

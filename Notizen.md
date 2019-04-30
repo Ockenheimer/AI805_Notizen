@@ -648,8 +648,38 @@ Diese Systeme müssen aus Sicht des zu schützendenen Systems "so weit außen wi
 
 Zwischen dem internen und externen Netz wird ein zsätzliches Subnetz abgetrennt, welches von innen und außen nur durch Paketfilter erreicht werden kann. Es wird als screened subnet (oder auch DMZ) bezeichnet.
 
+##### Fazit zentrale Firewall
+
+- kontrollieren und analysieren die Kommunikation auf Netzwerk-, Transport- und Anwendungsebene (ein- wie ausgehend)
+- prüfen, welche Rechnersysteme miteinander kommunizieren dürfen
+- prüfen, welche Benutzer eine Kommunikation aufbauen dürfen
+- überprüfen die Echtheit der Benutzer (Authentifikation)
+- protokollieren Aktivitäten und Ereignisse
+- reagieren auf vordefinierte Ereignisse
+- schützen nicht vor internen Angriffen
+- schützen nicht vor Angriffen, die über andere Netzzugänge laufen
+
+
 
 #### VPN (Funktionsweise)
+
+- Sicherer Datentransfer zwischen zwei oder mehr lokalen Netzen über offene unsichere Netze durch Emulation eines homogenen virtuellen Netzes
+- Gewährleistung von Vertraulichkeit der Information, Integrität der Daten und / oder Authentifikation der Kommunikationspartner durch Tunneling
+- Ggf. Bereitstellung von Audit- und Accounting-Informationen
+
+##### Funktionsweise
+Ein VPN kann auf verschiedenen OSI-Ebenen eingerichtet werden, Daher ist die Funktionsweise sehr allgemein erklärt
+
+**Encapsulatinion**
+Die Pakete des zu tunnelnden Protokolls (z.B. IP-Pakete) bekommt einen zusätzlichen Header (den sog. Tunnel-Header) am Startpunkt des Tunnels (VPN-Gateway, bzw. VPN-Client)
+
+**Routing**
+Im Tunnelheader befinden sich die Informationen zum Routing, der Verschlüsselung, usw. 
+Aufgrund dieser Informationen wird das Paket über das WAN bis zum Tunnelendpunkt geroutet.
+
+**Decapsulation**
+Am Tunnelendpunkt (VPN-Server, bzw. weiteres VPN-Gateway) wird der zusätzliche Tunnelheader entfernt. Ggf. wird eine Entschlüsselung des hinterlegten Pakets durchgeführt.
+
 
 
 ### Authentifizierungsprotokolle (Passwort, Challenge Response, Kerberos)
