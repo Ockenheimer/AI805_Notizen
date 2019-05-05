@@ -1595,8 +1595,104 @@ Am Tunnelendpunkt (VPN-Server, bzw. weiteres VPN-Gateway) wird der zusätzliche 
 <li>Passwort ist zu kurz oder zu einfach und wird erraten</li>
 </ul>
 <h3 id="challenge-response">Challenge Response<a class="headerlink" href="#challenge-response" title="Permanent link"></a></h3>
+<ul>
+<li>Authentifizierung des Clients durch Server nach erfolgreichem Protokollverlauf</li>
+<li>Client und Server verfügen über ein zuvor ausgetauschtes Geheimnis</li>
+<li>Geheime Informationen werden nicht direkt übertragen</li>
+</ul>
+<h4 id="ablauf_2">Ablauf<a class="headerlink" href="#ablauf_2" title="Permanent link"></a></h4>
+<ol>
+<li>Client meldet sich beim Server</li>
+<li>Server sendet Zufallszahl an Client (Challenge)</li>
+<li>Client verknüpft Zufallszahl mit Geheimniss (Act) und sendet dies als Response zurück</li>
+<li>Server verifiziert die Response (Check)</li>
+<li>Die Authentifizierung wird akzeptiert oder abgelehnt</li>
+</ol>
 <h3 id="kerberos">Kerberos<a class="headerlink" href="#kerberos" title="Permanent link"></a></h3>
+<ul>
+<li>Authentifizierungsmechanismus für verteilte Client/Server-Systeme</li>
+<li>1986 von MIT IBM und DEC entwickelt</li>
+<li><strong>Ziel</strong> Authentifizierter Zugriff auf Netzwerkdienste durch Tickets</li>
+<li>Funktionalität:<ul>
+<li>Authentifizierung des Principals</li>
+<li>Erzeugung und Verteilung einmaliger Sitzungsschlüssel</li>
+</ul>
+</li>
+<li>Idee: Ticket-Granting Ticket erzeugt nach erfolgter Authentifizierung ein Service-Ticket</li>
+</ul>
 <h2 id="unternehmensweite-it-sicherheitspolitik-vorgehensweise-rechtliche-aspekte-penetration-testing">Unternehmensweite IT-Sicherheitspolitik (Vorgehensweise, rechtliche Aspekte, Penetration Testing)<a class="headerlink" href="#unternehmensweite-it-sicherheitspolitik-vorgehensweise-rechtliche-aspekte-penetration-testing" title="Permanent link"></a></h2>
+<p>IT-Sicherheitspolitik ist ein Rahmenwerk, welches auf den Sicherheitszielen und Sicherheitsanforderungen des Unternehmens beruht. Es stellt ein Konzept mit Vorgaben und Richtlinien für den Bereich IT-Sicherheit ung IT-Risikomanagement dar und basiert auf den identifizierten Risiken und den daraus resultierenden Sicherheitsanforderungen.</p>
+<p>Zur Umsetzung wirkungsvoller technischer Massnahmen bedarf es eines hohen Fachwissens und Kenntnis der Stärken und Schwächen der am Markt erhältilichen Produkte.</p>
 <h3 id="vorgehensweise_1">Vorgehensweise<a class="headerlink" href="#vorgehensweise_1" title="Permanent link"></a></h3>
+<h4 id="zielfestlegung">Zielfestlegung<a class="headerlink" href="#zielfestlegung" title="Permanent link"></a></h4>
+<p>zu schützende Ziele müssen identifiziert werden und mit den Sicherheitszielen 
+des Unternehmens abgestimmt werden.</p>
+<h4 id="bedrohungsanalyse-erstellen">Bedrohungsanalyse erstellen<a class="headerlink" href="#bedrohungsanalyse-erstellen" title="Permanent link"></a></h4>
+<p>Welche Ereignisse konnen Schaden im Unternehmen bewirken? Als Schaden gilt z.B. Ausfall technischer Systeme, aber auch menschliche Gesundheit, Verlust von Wertgegenständen, usw.</p>
+<p>Welche Schwachstellen gibt es in der technischen Sturktur des Unternehmens? Hierzu zählen Schwachstellen in Hard- oder Software, aber auch menschliches Versagen, usw.</p>
+<h4 id="risikoanalyse">Risikoanalyse<a class="headerlink" href="#risikoanalyse" title="Permanent link"></a></h4>
+<p>Auf Basis der Bedrohungsanalyse wird ein Maß für das Risiko ermittelt. Wie hoch ist das Risiko bei einem Angriff, also die Realisierung einer Bedrohung durch Ausnutzung einer Schwachstelle?</p>
+<h4 id="sicherheitskonzept">Sicherheitskonzept<a class="headerlink" href="#sicherheitskonzept" title="Permanent link"></a></h4>
+<p>Welche Gegenmassnahmen, Regeln oder Vorgaben werden getroffen, um das Risiko für einen erfolgreichen Angriff so gering wie möglich zu halten?</p>
+<h4 id="umsetzung">Umsetzung<a class="headerlink" href="#umsetzung" title="Permanent link"></a></h4>
+<p>Das Sicherheitskonzept wird im Unternehmen eingesetzt</p>
+<h4 id="kontrolle">Kontrolle<a class="headerlink" href="#kontrolle" title="Permanent link"></a></h4>
+<p>Wird das Sicherheitskonzept eingehalten? Greifen die Sicherungsmechanismen korrekt?</p>
+<h4 id="korrekturen">Korrekturen<a class="headerlink" href="#korrekturen" title="Permanent link"></a></h4>
+<p>Werden in der Kontrolle Probleme festgestellt, wird aufgrund dieser Erkenntnisse die Bedrohungsanalyse angepasst und schlussendlich ein verändertes Sicherheitskonzept erarbeitet. Der Kreislauf beginnt von Neuem.</p>
 <h3 id="rechtliche-aspekte">rechtliche Aspekte<a class="headerlink" href="#rechtliche-aspekte" title="Permanent link"></a></h3>
-<h3 id="penetration-testing">Penetration Testing<a class="headerlink" href="#penetration-testing" title="Permanent link"></a></h3></article></body></html>
+<p>Rechtliche Vorgaben bilden z.B.:
+- EU-DSGVO
+    - EU-Datenschutzgrundverordnung
+    - seit Mai 2018 in Kraft
+    - EU-weite Vereinheitlichung der Regelungen zur Verarbeitung personenbezogener Daten
+- §9 Bundesdatenschutzgesetz alte Fassung (BDSG a.F.)
+    - Einrichtung technsicher Sicherungsmöglichkeiten
+    - seit Mai 2018 außer Kraft
+    - ersetzt z.B. durch Art. 25 EU-DSGVO
+- §§ 91 (2) u. 93 Aktiengesetz (AktG)
+    - Einführung 1998 durch Gestz zur Kontrolle und Transparenz im Unternehmensbereich (KonTraG)
+    - Verantwortung für Sicherheit des Unternehmens (auch IT-Sicherheit) liegt bei Vorstand
+- Basel III
+    - Vorschrift zur Bankenregulierung aus 2013+
+    - In der EU 2014 umgesetzt in der Eigentkapitalrichtlinie
+    - Bankkredite richten sich nach dem Risiko des Kreditnehmers
+        - hier auch in Hinblick auf die IT-Sicherheitskonzepte des Kreditnehmers
+- Sarbanes-Oxley Act
+    - IT-Sciherheitsmassnahmen für Kontrollsysteme der Finanzdaten von Unternehmen vorgeschrieben
+- §§ 202a-c Strafgesetzbuch (StGB)
+    - &ldquo;Hackerparagraphen&rdquo;
+    - Strafrechtliche Einordnung des Besitzes oder Betriebs von Hard- und Software zur Umgehung von Sicherheitsmechanismen
+    - Strafbar wenn Betrieb &ldquo;Zur Begehung einer Straftat&rdquo; erfolgt.
+    - =&gt; Sicherheitsforscher machen sich nicht strafbar, wenn durch die Nutzung keine weitere Straftat begangen wird (z.B. im Rahmen eines Sicherheits-Audits)</p>
+<h3 id="penetration-testing">Penetration Testing<a class="headerlink" href="#penetration-testing" title="Permanent link"></a></h3>
+<p>Aktives zielgerichtets Angriffsszenario auf ein IT-System zur Identifikation von Schwachstellen.</p>
+<p>Wird z.B. im Rahmen eines Audits durchgeführt, um die Bedrohungsanalyse der IT-Sicherheitspolitik anzupassen.</p>
+<p>Pen-Tester sind Sicherheitsexperten die von Eigentümern von IT-Systemen beauftragt werden, die Sicherheitssysteme eines Unternehmens zu testen.</p>
+<p>Hierzu simulieren die Pen-Tester Angriffe auf das IT-System, um Schwachstellen in diesen Systemen aufzudecken.</p>
+<p>Penetration Tests sind immer nur Momentaufnahmen. Ein aktuell &ldquo;sicheres&rdquo; System kann bereits kurze Zeit später durch eine unentdeckte oder neu aufgetretene Lücke angreifbar sein.</p>
+<h4 id="ergebnis">Ergebnis<a class="headerlink" href="#ergebnis" title="Permanent link"></a></h4>
+<p>Am Ende eines Penetration Tests steht immer die Dokumentation der durchgeführten Tests. War das Eindringen in das getestete System möglich, erstellt das beauftragte Unternehmen in der Regel
+- Maßnahmenkatalog
+    Eine Zusammenstellung von Maßnahmen auf organisatorischer und technischer Ebene zur Eindämmung von Schwachstellen
+- Mängelliste
+    Eine Aufstellung der aufgezeigten Mängel, mit der das Unternehmen ggf. schnell reagieren kann
+- konkrete Anweisungen 
+    Pen-Tests können konkrete Anweisungen zur Konfiguration der vorhandnen Hard- und Software liefern, mit der Sicherheitslücken im Unternehmen geschlossen werden können.</p>
+<h4 id="typische-angriffe">Typische Angriffe<a class="headerlink" href="#typische-angriffe" title="Permanent link"></a></h4>
+<ul>
+<li>Erraten von Passwörtern</li>
+<li>Einspielen gefälschter Datenpakete</li>
+<li>Mithören der Kommunikation</li>
+<li>Ausnutzen bekannter Schwachstellen in OS und Anwendungen</li>
+<li>Umgehen von Zugriffs- und Zutrittskontrollsystemen</li>
+<li>DoS-Attacken</li>
+</ul>
+<p>Angriffspunkte sind
+- Mail-Server
+- Webserver
+- Firewalls
+- Router
+- WLAN-AP
+- TK-Anlagen
+- etc.</p></article></body></html>

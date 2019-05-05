@@ -651,22 +651,132 @@ Einseitige Authentifizierung durch Kenntnis eines bestimmten alphanummerischen M
 
 ### Challenge Response
 
+- Authentifizierung des Clients durch Server nach erfolgreichem Protokollverlauf
+- Client und Server verfügen über ein zuvor ausgetauschtes Geheimnis
+- Geheime Informationen werden nicht direkt übertragen
+
+#### Ablauf
+1. Client meldet sich beim Server
+2. Server sendet Zufallszahl an Client (Challenge)
+3. Client verknüpft Zufallszahl mit Geheimniss (Act) und sendet dies als Response zurück
+4. Server verifiziert die Response (Check)
+5. Die Authentifizierung wird akzeptiert oder abgelehnt
 
 
 ### Kerberos
 
+- Authentifizierungsmechanismus für verteilte Client/Server-Systeme
+- 1986 von MIT IBM und DEC entwickelt
+- **Ziel** Authentifizierter Zugriff auf Netzwerkdienste durch Tickets
+- Funktionalität:
+	- Authentifizierung des Principals
+	- Erzeugung und Verteilung einmaliger Sitzungsschlüssel
+- Idee: Ticket-Granting Ticket erzeugt nach erfolgter Authentifizierung ein Service-Ticket
 
 
 ## Unternehmensweite IT-Sicherheitspolitik (Vorgehensweise, rechtliche Aspekte, Penetration Testing)
 	
+IT-Sicherheitspolitik ist ein Rahmenwerk, welches auf den Sicherheitszielen und Sicherheitsanforderungen des Unternehmens beruht. Es stellt ein Konzept mit Vorgaben und Richtlinien für den Bereich IT-Sicherheit ung IT-Risikomanagement dar und basiert auf den identifizierten Risiken und den daraus resultierenden Sicherheitsanforderungen.
+
+Zur Umsetzung wirkungsvoller technischer Massnahmen bedarf es eines hohen Fachwissens und Kenntnis der Stärken und Schwächen der am Markt erhältilichen Produkte.
 
 ###Vorgehensweise
 
+#### Zielfestlegung
 
+zu schützende Ziele müssen identifiziert werden und mit den Sicherheitszielen 
+des Unternehmens abgestimmt werden.
 
+#### Bedrohungsanalyse erstellen
+
+Welche Ereignisse konnen Schaden im Unternehmen bewirken? Als Schaden gilt z.B. Ausfall technischer Systeme, aber auch menschliche Gesundheit, Verlust von Wertgegenständen, usw.
+
+Welche Schwachstellen gibt es in der technischen Sturktur des Unternehmens? Hierzu zählen Schwachstellen in Hard- oder Software, aber auch menschliches Versagen, usw.
+
+#### Risikoanalyse
+
+Auf Basis der Bedrohungsanalyse wird ein Maß für das Risiko ermittelt. Wie hoch ist das Risiko bei einem Angriff, also die Realisierung einer Bedrohung durch Ausnutzung einer Schwachstelle?
+
+#### Sicherheitskonzept
+
+Welche Gegenmassnahmen, Regeln oder Vorgaben werden getroffen, um das Risiko für einen erfolgreichen Angriff so gering wie möglich zu halten?
+
+#### Umsetzung
+
+Das Sicherheitskonzept wird im Unternehmen eingesetzt
+
+#### Kontrolle
+
+Wird das Sicherheitskonzept eingehalten? Greifen die Sicherungsmechanismen korrekt?
+
+#### Korrekturen
+
+Werden in der Kontrolle Probleme festgestellt, wird aufgrund dieser Erkenntnisse die Bedrohungsanalyse angepasst und schlussendlich ein verändertes Sicherheitskonzept erarbeitet. Der Kreislauf beginnt von Neuem.
 
 ### rechtliche Aspekte
 
-
+Rechtliche Vorgaben bilden z.B.:
+- EU-DSGVO
+	- EU-Datenschutzgrundverordnung
+	- seit Mai 2018 in Kraft
+	- EU-weite Vereinheitlichung der Regelungen zur Verarbeitung personenbezogener Daten
+- §9 Bundesdatenschutzgesetz alte Fassung (BDSG a.F.)
+	- Einrichtung technsicher Sicherungsmöglichkeiten
+	- seit Mai 2018 außer Kraft
+	- ersetzt z.B. durch Art. 25 EU-DSGVO
+- §§ 91 (2) u. 93 Aktiengesetz (AktG)
+	- Einführung 1998 durch Gestz zur Kontrolle und Transparenz im Unternehmensbereich (KonTraG)
+	- Verantwortung für Sicherheit des Unternehmens (auch IT-Sicherheit) liegt bei Vorstand
+- Basel III
+	- Vorschrift zur Bankenregulierung aus 2013+
+	- In der EU 2014 umgesetzt in der Eigentkapitalrichtlinie
+	- Bankkredite richten sich nach dem Risiko des Kreditnehmers
+		- hier auch in Hinblick auf die IT-Sicherheitskonzepte des Kreditnehmers
+- Sarbanes-Oxley Act
+	- IT-Sciherheitsmassnahmen für Kontrollsysteme der Finanzdaten von Unternehmen vorgeschrieben
+- §§ 202a-c Strafgesetzbuch (StGB)
+	- "Hackerparagraphen"
+	- Strafrechtliche Einordnung des Besitzes oder Betriebs von Hard- und Software zur Umgehung von Sicherheitsmechanismen
+	- Strafbar wenn Betrieb "Zur Begehung einer Straftat" erfolgt.
+	- => Sicherheitsforscher machen sich nicht strafbar, wenn durch die Nutzung keine weitere Straftat begangen wird (z.B. im Rahmen eines Sicherheits-Audits)
 
 ### Penetration Testing
+
+Aktives zielgerichtets Angriffsszenario auf ein IT-System zur Identifikation von Schwachstellen.
+
+Wird z.B. im Rahmen eines Audits durchgeführt, um die Bedrohungsanalyse der IT-Sicherheitspolitik anzupassen.
+
+Pen-Tester sind Sicherheitsexperten die von Eigentümern von IT-Systemen beauftragt werden, die Sicherheitssysteme eines Unternehmens zu testen.
+
+Hierzu simulieren die Pen-Tester Angriffe auf das IT-System, um Schwachstellen in diesen Systemen aufzudecken.
+
+Penetration Tests sind immer nur Momentaufnahmen. Ein aktuell "sicheres" System kann bereits kurze Zeit später durch eine unentdeckte oder neu aufgetretene Lücke angreifbar sein.
+
+#### Ergebnis
+Am Ende eines Penetration Tests steht immer die Dokumentation der durchgeführten Tests. War das Eindringen in das getestete System möglich, erstellt das beauftragte Unternehmen in der Regel
+- Maßnahmenkatalog
+	Eine Zusammenstellung von Maßnahmen auf organisatorischer und technischer Ebene zur Eindämmung von Schwachstellen
+- Mängelliste
+	Eine Aufstellung der aufgezeigten Mängel, mit der das Unternehmen ggf. schnell reagieren kann
+- konkrete Anweisungen 
+	Pen-Tests können konkrete Anweisungen zur Konfiguration der vorhandnen Hard- und Software liefern, mit der Sicherheitslücken im Unternehmen geschlossen werden können.
+
+
+
+#### Typische Angriffe
+
+- Erraten von Passwörtern
+- Einspielen gefälschter Datenpakete
+- Mithören der Kommunikation
+- Ausnutzen bekannter Schwachstellen in OS und Anwendungen
+- Umgehen von Zugriffs- und Zutrittskontrollsystemen
+- DoS-Attacken
+
+Angriffspunkte sind
+- Mail-Server
+- Webserver
+- Firewalls
+- Router
+- WLAN-AP
+- TK-Anlagen
+- etc.
