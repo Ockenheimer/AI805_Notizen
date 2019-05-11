@@ -24,6 +24,7 @@ IT-Sicherheit ist Beschreibung von Maßnahmen und Vorgehensweise zum Schutz von 
 
 ### Sinn und Zweck in der digitalen Gesellschaft
 Bestehende Bedrohungsszenarien der digitalen Gesellschaft durch höheren Grad der Vernetzung, zunehmende Komplexität der eingesetzten Systeme und unzureichender Ausbildung am Gerät
+
 - Beispiele:
 	- E-Mails
 		- Versand im Klartext
@@ -448,6 +449,7 @@ Die Addition wird mod2 durchgeführt
 
 Ich denk mal, es wird nicht erwartet, die Hash-Funktion von SHA-1 darzustellen. Wäre auch albern.
 Soviel sei nur gesagt:
+
 - Jeweils 20 Wörter werden über 20 Runden "ge-XOR-ed" und danach addiert
 
 Zum Schluss bleibt aus jedem 512-Bit-Block ein 160-Bit Hash über
@@ -461,6 +463,7 @@ Der letztendliche Hash des gesamten Dokumentes m ergibt sich dann aus der mod(2)
 
 #### Anforderung an Unterschriften
 Prinzipiell soll eine Unterschrift folgende Eigenschaften haben
+
 - Authentizität
 - Integrität
 - Verbindlichkeit
@@ -656,6 +659,7 @@ Einseitige Authentifizierung durch Kenntnis eines bestimmten alphanummerischen M
 - Geheime Informationen werden nicht direkt übertragen
 
 #### Ablauf
+
 1. Client meldet sich beim Server
 2. Server sendet Zufallszahl an Client (Challenge)
 3. Client verknüpft Zufallszahl mit Geheimniss (Act) und sendet dies als Response zurück
@@ -716,6 +720,7 @@ Werden in der Kontrolle Probleme festgestellt, wird aufgrund dieser Erkenntnisse
 ### rechtliche Aspekte
 
 Rechtliche Vorgaben bilden z.B.:
+
 - EU-DSGVO
 	- EU-Datenschutzgrundverordnung
 	- seit Mai 2018 in Kraft
@@ -754,10 +759,13 @@ Penetration Tests sind immer nur Momentaufnahmen. Ein aktuell "sicheres" System 
 
 #### Ergebnis
 Am Ende eines Penetration Tests steht immer die Dokumentation der durchgeführten Tests. War das Eindringen in das getestete System möglich, erstellt das beauftragte Unternehmen in der Regel
+
 - Maßnahmenkatalog
 	Eine Zusammenstellung von Maßnahmen auf organisatorischer und technischer Ebene zur Eindämmung von Schwachstellen
+
 - Mängelliste
 	Eine Aufstellung der aufgezeigten Mängel, mit der das Unternehmen ggf. schnell reagieren kann
+
 - konkrete Anweisungen 
 	Pen-Tests können konkrete Anweisungen zur Konfiguration der vorhandnen Hard- und Software liefern, mit der Sicherheitslücken im Unternehmen geschlossen werden können.
 
@@ -772,7 +780,8 @@ Am Ende eines Penetration Tests steht immer die Dokumentation der durchgeführte
 - Umgehen von Zugriffs- und Zutrittskontrollsystemen
 - DoS-Attacken
 
-Angriffspunkte sind
+Angriffspunkte sind:
+
 - Mail-Server
 - Webserver
 - Firewalls
